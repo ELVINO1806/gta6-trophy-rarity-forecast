@@ -12,7 +12,7 @@ anchor on the logit scale by a blend of two candidate moves, heavily damped:
     is capped at 6x the players growth factor, so the implied rate cannot run away on a
     denominator story alone. The move is logit(implied rate) - logit(anchor rate).
 
-The blended move (0.65 A + 0.35 B) is damped by W/(W+H) (W = the trophy's observed window in
+The blended move (0.8 A + 0.2 B) is damped by W/(W+H) (W = the trophy's observed window in
 hours, H = the horizon in hours), scaled by MOVE_SHRINK, and capped at
 min(5, 0.75 * observed logit range + 1.25) in absolute value. Damping is the point: at the final
 horizon the forecast distance is several times the observed window, and an undamped trend
@@ -49,10 +49,10 @@ OUTPUT_DIR = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
 LEVELS = [0.05, 0.25, 0.5, 0.75, 0.95]
 Z = [-1.645, -0.674, 0.0, 0.674, 1.645]
 
-W_TREND = 0.65          # blend weight of the trend move
-W_DECOMP = 0.35         # blend weight of the earners/players decomposition move
-MOVE_SHRINK = 0.6       # global damping on the blended move
-SIGMA_SCALE = 0.65      # global scale on the combined spread
+W_TREND = 0.8           # blend weight of the trend move
+W_DECOMP = 0.2          # blend weight of the earners/players decomposition move
+MOVE_SHRINK = 0.75      # global damping on the blended move
+SIGMA_SCALE = 0.5       # global scale on the combined spread
 SHRINK_K = 6.0          # slope shrinkage: weight n/(n+K) on the trophy's own slope
 SPARSE_SPREAD_MULT = 1.5  # widened-persistence spread multiplier for < 3 usable reads
 EARNERS_GROWTH_CAP = 6.0  # earners growth factor <= this x players growth factor
